@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,9 +19,11 @@ namespace simonSays_DI
         public MainPage()
         {
             this.InitializeComponent();
+           ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
         private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+         
             if (op1.IsSelected)
             {
                 rec36.Fill = new SolidColorBrush(Colors.LightGray);
@@ -103,5 +98,12 @@ namespace simonSays_DI
             this.Frame.Navigate(typeof(MainPage));
         }
 
+        private async void rect_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            MessageDialog dialog = new MessageDialog("Has pulsadoooooooooo!!!!!", "Funcionaaaaaaaaaaaaa");
+            
+            dialog.ShowAsync();
+
+        }
     }
 }
