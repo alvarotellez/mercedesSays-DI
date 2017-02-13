@@ -21,7 +21,7 @@
                 <!--Campos para que el usuario seleccione el nivel del juego-->
                 <TextBlock x:Name="lblNivel" Text="Nivel:" FontSize="18" RelativePanel.LeftOf="comboNivel" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,10,0"></TextBlock>
                 <ComboBox x:Name="comboNivel" Width="100"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,25,0" SelectionChanged="comboNivel_SelectionChanged">
-                    <ComboBoxItem IsEnabled="True" x:Name="op1">Normal</ComboBoxItem>
+                    <ComboBoxItem x:Name="op1">Normal</ComboBoxItem>
                     <ComboBoxItem x:Name="op2">Avanzado</ComboBoxItem>
                     <ComboBoxItem x:Name="op3">Profesional</ComboBoxItem>
                 </ComboBox>
