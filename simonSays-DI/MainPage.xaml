@@ -8,6 +8,87 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="#E0F2F1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Stack Panel de la cabecera del nivel y el resultado-->
+            <RelativePanel Background="#4DB6AC">
+                <AppBarButton Icon="Refresh" Label="Jugar de nuevo" RelativePanel.AlignLeftWithPanel="True" Click="AppBarButton_Click" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="25,0,0,0" />
+                <TextBlock x:Name="lblScore" Text="Puntuación:" FontSize="18" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" VerticalAlignment="Center" Margin="25,0,0,0"></TextBlock>
+                <TextBlock x:Name="txtScore" Text="0" RelativePanel.RightOf="lblScore" RelativePanel.AlignVerticalCenterWithPanel="True" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0" ></TextBlock>
+                <!--Campos para que el usuario seleccione el nivel del juego-->
+                <TextBlock x:Name="lblNivel" Text="Nivel:" FontSize="18" RelativePanel.LeftOf="comboNivel" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,10,0"></TextBlock>
+                <ComboBox x:Name="comboNivel" Width="100"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,25,0" SelectionChanged="comboNivel_SelectionChanged">
+                    <ComboBoxItem IsEnabled="True" x:Name="op1">Normal</ComboBoxItem>
+                    <ComboBoxItem x:Name="op2">Avanzado</ComboBoxItem>
+                    <ComboBoxItem x:Name="op3">Profesional</ComboBoxItem>
+                </ComboBox>
+            </RelativePanel>
+            <Border Grid.Column="0" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Gray" Height="500" Width="500">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
 
+                    <!--Primera columna-->
+                    <Rectangle x:Name="rec36" Grid.Column="0" Grid.Row="0" Fill="#D50000"></Rectangle>
+                    <Rectangle x:Name="rec35" Grid.Column="0" Grid.Row="1" Fill="#ff2e18"></Rectangle>
+                    <Rectangle x:Name="rec34" Grid.Column="0" Grid.Row="2" Fill="#D50000"></Rectangle>
+                    <Rectangle x:Name="rec33" Grid.Column="0" Grid.Row="3" Fill="#0078D7"></Rectangle>
+                    <Rectangle x:Name="rec32" Grid.Column="0" Grid.Row="4" Fill="#5B83D8"></Rectangle>
+                    <Rectangle x:Name="rec31" Grid.Column="0" Grid.Row="5" Fill="#0078D7"></Rectangle>
+                    <!--Segunda columna-->
+                    <Rectangle x:Name="rec17" Grid.Column="1" Grid.Row="0" Fill="#ff2e18"></Rectangle>
+                    <Rectangle x:Name="rec5" Grid.Column="1" Grid.Row="1" Fill="#D50000"></Rectangle>
+                    <Rectangle x:Name="rec16" Grid.Column="1" Grid.Row="2" Fill="#ff2e18"></Rectangle>
+                    <Rectangle x:Name="rec15" Grid.Column="1" Grid.Row="3" Fill="#5B83D8"></Rectangle>
+                    <Rectangle x:Name="rec14" Grid.Column="1" Grid.Row="4" Fill="#0078D7"></Rectangle>
+                    <Rectangle x:Name="rec30" Grid.Column="1" Grid.Row="5" Fill="#5B83D8"></Rectangle>
+                    <!--Tercera columna-->
+                    <Rectangle x:Name="rec18" Grid.Column="2" Grid.Row="0" Fill="#D50000"></Rectangle>
+                    <Rectangle x:Name="rec6" Grid.Column="2" Grid.Row="1" Fill="#ff2e18"></Rectangle>
+                    <Rectangle x:Name="rec1" Tag="1"  Grid.Column="2" Grid.Row="2" Fill="#D50000"></Rectangle>
+                    <Rectangle x:Name="rec3" Tag="2" Grid.Column="2" Grid.Row="3" Fill="#0078D7"></Rectangle>
+                    <Rectangle x:Name="rec13" Grid.Column="2" Grid.Row="4" Fill="#5B83D8"></Rectangle>
+                    <Rectangle x:Name="rec29" Grid.Column="2" Grid.Row="5" Fill="#0078D7"></Rectangle>
+                    <!--Cuarta columna-->
+                    <Rectangle x:Name="rec19" Grid.Column="3" Grid.Row="0" Fill="#107c10"></Rectangle>
+                    <Rectangle x:Name="rec7"  Grid.Column="3" Grid.Row="1" Fill="#44c300"></Rectangle>
+                    <Rectangle x:Name="rec2"  Grid.Column="3" Grid.Row="2" Fill="#107c10"></Rectangle>
+                    <Rectangle x:Name="rec4"  Grid.Column="3" Grid.Row="3" Fill="#FFB900"></Rectangle>
+                    <Rectangle x:Name="rec12" Grid.Column="3" Grid.Row="4" Fill="#ffe100"></Rectangle>
+                    <Rectangle x:Name="rec28" Grid.Column="3" Grid.Row="5" Fill="#FFB900"></Rectangle>
+                    <!--Quinta columna-->
+                    <Rectangle x:Name="rec20" Grid.Column="4" Grid.Row="0" Fill="#44c300"></Rectangle>
+                    <Rectangle x:Name="rec8" Grid.Column="4" Grid.Row="1" Fill="#107c10"></Rectangle>
+                    <Rectangle x:Name="rec9" Grid.Column="4" Grid.Row="2" Fill="#44c300"></Rectangle>
+                    <Rectangle x:Name="rec10" Grid.Column="4" Grid.Row="3" Fill="#ffe100"></Rectangle>
+                    <Rectangle x:Name="rec11" Grid.Column="4" Grid.Row="4" Fill="#FFB900"></Rectangle>
+                    <Rectangle x:Name="rec27" Grid.Column="4" Grid.Row="5" Fill="#ffe100"></Rectangle>
+                    <!--Sexta columna-->
+                    <Rectangle x:Name="rec21" Grid.Column="5" Grid.Row="0" Fill="#107c10"></Rectangle>
+                    <Rectangle x:Name="rec22" Grid.Column="5" Grid.Row="1" Fill="#44c300"></Rectangle>
+                    <Rectangle x:Name="rec23" Grid.Column="5" Grid.Row="2" Fill="#107c10"></Rectangle>
+                    <Rectangle x:Name="rec24" Grid.Column="5" Grid.Row="3" Fill="#FFB900"></Rectangle>
+                    <Rectangle x:Name="rec25" Grid.Column="5" Grid.Row="4" Fill="#ffe100"></Rectangle>
+                    <Rectangle x:Name="rec26" Grid.Column="5" Grid.Row="5" Fill="#FFB900"></Rectangle>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
