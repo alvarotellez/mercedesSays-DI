@@ -34,20 +34,20 @@
                 <!--Width="{Binding ActualWidth, ElementName=Row1, Mode=OneWay}"-->
                 <Grid x:Name="grid2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col1" Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col2" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col3" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col4" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col5" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col6" Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition x:Name="row1" Height="Auto"></RowDefinition>
+                        <RowDefinition x:Name="row2" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row3" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row4" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row5" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row6" Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--Primera columna-->
