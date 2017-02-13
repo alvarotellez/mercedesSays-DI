@@ -1,5 +1,7 @@
-﻿using Windows.UI;
+﻿using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -17,9 +19,11 @@ namespace simonSays_DI
         public MainPage()
         {
             this.InitializeComponent();
+           ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
         private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+         
             if (op1.IsSelected)
             {
                 rec36.Fill = new SolidColorBrush(Colors.LightGray);
