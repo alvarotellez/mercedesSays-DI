@@ -26,23 +26,23 @@
                     <ComboBoxItem x:Name="op3">Profesional</ComboBoxItem>
                 </ComboBox>
             </RelativePanel>
-            <Border Grid.Column="0" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Gray" Height="500" Width="500">
+            <Border x:Name="border" Grid.Column="0" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Gray" Height="500" Width="500">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition x:Name="col1" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col2" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col3" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col4" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col5" Width="*"></ColumnDefinition>
+                        <ColumnDefinition x:Name="col6" Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition x:Name="row1" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row2" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row3" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row4" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row5" Height="*"></RowDefinition>
+                        <RowDefinition x:Name="row6" Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--Primera columna-->
