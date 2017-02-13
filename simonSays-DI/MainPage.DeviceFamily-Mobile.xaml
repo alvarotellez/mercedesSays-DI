@@ -24,6 +24,7 @@
                 <ComboBox x:Name="comboNivel" Width="40"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,25,0" SelectionChanged="comboNivel_SelectionChanged">
                     <ComboBoxItem x:Name="op1">Normal</ComboBoxItem>
                     <ComboBoxItem x:Name="op2">Avanzado</ComboBoxItem>
+                    <ComboBoxItem x:Name="op3" IsEnabled="False">Profesional</ComboBoxItem>
                 </ComboBox>
             </RelativePanel>
             <Border x:Name="border" Grid.Column="0" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Gray"
