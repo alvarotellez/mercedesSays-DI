@@ -139,21 +139,10 @@ namespace simonSays_DI
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-            //MessageDialog dialog = new MessageDialog("Has pulsadoooooooooo!!!!!", "Funcionaaaaaaaaaaaaa");        
-            //dialog.ShowAsync();
+
 
             Rectangle rectanClicked = sender as Rectangle;
-
-            //switch (rectanClicked.Name)
-            //{
-            //    case "rec1":
-            //        rec1.Fill = new SolidColorBrush(Colors.LightGray);
-            //        await Task.Delay(250);
-            //        rec1.Fill = new SolidColorBrush(Color.FromArgb(255, 213, 0, 0));
-            //        break;
-            //}   
-
-            
+                        
             //BOTONES ROJOS
              if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
             {
