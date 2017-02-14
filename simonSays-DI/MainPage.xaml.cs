@@ -58,12 +58,12 @@ namespace simonSays_DI
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
-            private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {   
+        private async void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
             if (op1.IsSelected)
             {
-                
+
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -125,10 +125,12 @@ namespace simonSays_DI
                 col5.Width = new GridLength(border.Width / 6);
                 col6.Width = new GridLength(border.Width / 6);
 
-
                 //Aqui hay que hacer el aleatorio hasta 36
                 Random random = new Random();
                 int rectPintar = random.Next(0, 35);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
+
             }
 
         }
@@ -200,7 +202,44 @@ namespace simonSays_DI
             }
 
         }
+        /// <summary>
+        /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
+        /// </summary>
+        /// <param name="numAleatorio"></param>
+        private void secuenciaFlash(int numAleatorio)
+        {
+            Rectangle rectanSelected = new Rectangle();
 
+            String nombreRectangulo = "rec"+numAleatorio;
+            
+            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
 
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+        }
+
+        //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
+        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
+        {
+
+            if (parent == null) return null;
+
+            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
+            {
+                return (T)parent;
+            }
+            T result = null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+
+                if (FindControl<T>(child, targetType, ControlName) != null)
+                {
+                    result = FindControl<T>(child, targetType, ControlName);
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }
