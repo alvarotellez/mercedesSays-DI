@@ -1,4 +1,6 @@
-﻿using Windows.Foundation;
+﻿using System;
+using Windows.Foundation;
+using Windows.System.Profile;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -19,22 +21,40 @@ namespace simonSays_DI
         public MainPage()
         {
             this.InitializeComponent();
-            //DEFAULT
-            row1.Height = new GridLength(0);
-            row2.Height = new GridLength(0);
-            row3.Height = new GridLength(border.Height / 2);
-            row4.Height = new GridLength(border.Height / 2);
-            row5.Height = new GridLength(0);
-            row6.Height = new GridLength(0);
 
-            col1.Width = new GridLength(0);
-            col2.Width = new GridLength(0);
-            col3.Width = new GridLength(border.Width / 2);
-            col4.Width = new GridLength(border.Width / 2);
-            col5.Width = new GridLength(0);
-            col6.Width = new GridLength(0);
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
+            {
+                row1.Height = new GridLength(0);
+                row2.Height = new GridLength(0);
+                row3.Height = new GridLength(border.Height / 2);
+                row4.Height = new GridLength(border.Height / 2);
+                row5.Height = new GridLength(0);
+                row6.Height = new GridLength(0);
 
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
+                col1.Width = new GridLength(0);
+                col2.Width = new GridLength(0);
+                col3.Width = new GridLength(border.Width / 2);
+                col4.Width = new GridLength(border.Width / 2);
+                col5.Width = new GridLength(0);
+                col6.Width = new GridLength(0);
+            }
+            else if(AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") {
+
+                row2.Height = new GridLength(0);
+                row3.Height = new GridLength(250/2);
+                row4.Height = new GridLength(250/2);
+                row5.Height = new GridLength(0);
+
+                col2.Width = new GridLength(0);
+                col3.Width = new GridLength(250 /2);
+                col4.Width = new GridLength(250 / 2);
+                col5.Width = new GridLength(0);
+
+            }
+
+
+
+
         }
         private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {   
@@ -75,6 +95,8 @@ namespace simonSays_DI
                 //rec10.Fill = new SolidColorBrush(Colors.LightGray);
                 //rec11.Fill = new SolidColorBrush(Colors.LightGray);
 
+
+                
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -89,6 +111,10 @@ namespace simonSays_DI
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
 
+
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(0, 3);
 
             }
 
@@ -129,24 +155,33 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 4);
                 col5.Width = new GridLength(border.Width / 4);
                 col6.Width = new GridLength(0);
+
+                //Aqui hay que hacer el aleatorio hasta 16
+
+                Random random = new Random();
+                int rectPintar = random.Next(0, 15);
             }
 
             if (op3.IsSelected)
             {
-                row1.Height = new GridLength(border.Height/6);
+                row1.Height = new GridLength(border.Height / 6);
                 row2.Height = new GridLength(border.Height / 6);
                 row3.Height = new GridLength(border.Height / 6);
                 row4.Height = new GridLength(border.Height / 6);
                 row5.Height = new GridLength(border.Height / 6);
                 row6.Height = new GridLength(border.Height / 6);
 
-                col1.Width = new GridLength(border.Width/6);
+                col1.Width = new GridLength(border.Width / 6);
                 col2.Width = new GridLength(border.Width / 6);
                 col3.Width = new GridLength(border.Width / 6);
                 col4.Width = new GridLength(border.Width / 6);
                 col5.Width = new GridLength(border.Width / 6);
                 col6.Width = new GridLength(border.Width / 6);
 
+
+                //Aqui hay que hacer el aleatorio hasta 36
+                Random random = new Random();
+                int rectPintar = random.Next(0, 35);
             }
 
         }

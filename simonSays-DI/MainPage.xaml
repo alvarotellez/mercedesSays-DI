@@ -48,8 +48,7 @@
                     <!--Primera columna-->
 
 
-                    <Rectangle x:Name="rec36" Grid.Column="0" Grid.Row="0" Fill="#D50000" Tapped="rect_tapped">
-                    </Rectangle>
+                    <Rectangle x:Name="rec36" Grid.Column="0" Grid.Row="0" Fill="#D50000" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec35" Grid.Column="0" Grid.Row="1" Fill="#ff2e18" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec34" Grid.Column="0" Grid.Row="2" Fill="#D50000" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec33" Grid.Column="0" Grid.Row="3" Fill="#0078D7" Tapped="rect_tapped"></Rectangle>
