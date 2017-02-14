@@ -56,25 +56,6 @@ namespace simonSays_DI
             }
 
 
-
-
-
-
-            //DEFAULT
-            row1.Height = new GridLength(0);
-            row2.Height = new GridLength(0);
-            row3.Height = new GridLength(250 / 2);
-            row4.Height = new GridLength(250 / 2);
-            row5.Height = new GridLength(0);
-            row6.Height = new GridLength(0);
-
-            col1.Width = new GridLength(0);
-            col2.Width = new GridLength(0);
-            col3.Width = new GridLength(border.Width / 2);
-            col4.Width = new GridLength(border.Width / 2);
-            col5.Width = new GridLength(0);
-            col6.Width = new GridLength(0);
-
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
             private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -82,8 +63,6 @@ namespace simonSays_DI
 
             if (op1.IsSelected)
             {
-
-
                 
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
