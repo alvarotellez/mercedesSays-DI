@@ -48,11 +48,9 @@
                     </Grid.RowDefinitions>
 
                     <!--Primera columna-->
-<<<<<<< HEAD
 
 
-=======
->>>>>>> master
+
                     <Rectangle x:Name="rec36" Grid.Column="0" Grid.Row="0" Fill="#D50000" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec35" Grid.Column="0" Grid.Row="1" Fill="#ff2e18" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec34" Grid.Column="0" Grid.Row="2" Fill="#D50000" Tapped="rect_tapped"></Rectangle>
