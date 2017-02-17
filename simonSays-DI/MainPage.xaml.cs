@@ -1,22 +1,16 @@
-<<<<<<< HEAD
-﻿using System.Threading.Tasks;
-using Windows.Foundation;
-=======
 ﻿using System;
 using Windows.Foundation;
 using Windows.System.Profile;
->>>>>>> master
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-<<<<<<< HEAD
-=======
 using System.Threading.Tasks;
->>>>>>> master
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Media.Animation;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -164,32 +158,12 @@ namespace simonSays_DI
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-<<<<<<< HEAD
-            //MessageDialog dialog = new MessageDialog("Has pulsadoooooooooo!!!!!", "Funcionaaaaaaaaaaaaa");        
-            //dialog.ShowAsync();
+
 
             Rectangle rectanClicked = sender as Rectangle;
-
-            //switch (rectanClicked.Name)
-            //{
-            //    case "rec1":
-            //        rec1.Fill = new SolidColorBrush(Colors.LightGray);
-            //        await Task.Delay(250);
-            //        rec1.Fill = new SolidColorBrush(Color.FromArgb(255, 213, 0, 0));
-            //        break;
-            //}   
-
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
-=======
-
-
-            Rectangle rectanClicked = sender as Rectangle;
-                        
-            //BOTONES ROJOS
-             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
->>>>>>> master
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -243,8 +217,6 @@ namespace simonSays_DI
                 await Task.Delay(250);
                 rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
             }
-<<<<<<< HEAD
-=======
 
         }
         /// <summary>
@@ -255,13 +227,12 @@ namespace simonSays_DI
         {
             Rectangle rectanSelected = new Rectangle();
 
-            String nombreRectangulo = "rec"+numAleatorio;
-            
+            String nombreRectangulo = "rec" + numAleatorio;
+
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
 
             rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
         }
->>>>>>> master
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
@@ -286,6 +257,41 @@ namespace simonSays_DI
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Método que muestra un mensaje cuando pierdes y de fondo crea la mayor epilepsia de tu vida
+        /// </summary>
+        private async void embolia()
+        {
+
+            Rectangle[] rectangulos = new Rectangle[] { rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9, rec10, rec11, rec12 };
+
+            for (int i = 0; i < rectangulos.Length; i++)
+            {          
+
+                rectangulos[i].Fill = new SolidColorBrush(Colors.Red);
+                await Task.Delay(100);
+                rectangulos[i].Fill = new SolidColorBrush(Colors.Blue);
+     
+            }
+
+
+            
+
+            //rec1.Fill = new SolidColorBrush(Colors.Red);
+            //await Task.Delay(100);
+            //rec1.Fill = new SolidColorBrush(Colors.Blue);
+            
+
+        }
+
+        private void btnAnimacion_Click(object sender, RoutedEventArgs e)
+        {
+
+            embolia();
+            
+            
         }
     }
 }
