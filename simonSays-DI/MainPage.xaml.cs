@@ -13,6 +13,18 @@ using Windows.UI.Xaml.Shapes;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
+/*
+TODO    
+que se cambie de color al original tras el flash
+cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidad
+guardar las secuencia de maquina y usuario
+iniciar flash al comienzo
+Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??)
+El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
+
+Extras v.63.2:
+Añadir sonidos al flash de la maquina y al click de la persona
+*/
 namespace simonSays_DI
 {
     /// <summary>
@@ -81,7 +93,9 @@ namespace simonSays_DI
 
                 //Aqui tengo que hacer el aleatorio hasta 4
                 Random random = new Random();
-                int rectPintar = random.Next(0, 3);
+                int rectPintar = random.Next(1, 4);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
 
             }
 
@@ -106,7 +120,9 @@ namespace simonSays_DI
                 //Aqui hay que hacer el aleatorio hasta 16
 
                 Random random = new Random();
-                int rectPintar = random.Next(0, 15);
+                int rectPintar = random.Next(1, 16);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
             }
 
             if (op3.IsSelected)
@@ -127,7 +143,7 @@ namespace simonSays_DI
 
                 //Aqui hay que hacer el aleatorio hasta 36
                 Random random = new Random();
-                int rectPintar = random.Next(0, 35);
+                int rectPintar = random.Next(1, 36);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
 
