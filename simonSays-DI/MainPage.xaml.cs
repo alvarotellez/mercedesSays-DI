@@ -1,15 +1,16 @@
-﻿using System;
+﻿
+using System.Threading.Tasks;
 using Windows.Foundation;
+using System;
 using Windows.System.Profile;
 using Windows.UI;
-using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Popups;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
@@ -177,7 +178,17 @@ namespace simonSays_DI
         {
 
 
+
             Rectangle rectanClicked = sender as Rectangle;
+
+
+
+            //BOTONES ROJOS
+            if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+
+
+
+            rectanClicked = sender as Rectangle;
 
             int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
             if (rectPintar == rectanguloElegido )
@@ -196,6 +207,9 @@ namespace simonSays_DI
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+
+             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -271,6 +285,7 @@ namespace simonSays_DI
             rectangulo.Fill = colorPrevio;
           //  rectangulo.Visibility = Visibility.Visible;
         }
+
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
