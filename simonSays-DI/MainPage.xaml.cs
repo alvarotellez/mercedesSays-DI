@@ -1,15 +1,37 @@
+<<<<<<< HEAD
 ﻿using System.Threading.Tasks;
 using Windows.Foundation;
+=======
+﻿using System;
+using Windows.Foundation;
+using Windows.System.Profile;
+>>>>>>> master
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+<<<<<<< HEAD
+=======
+using System.Threading.Tasks;
+>>>>>>> master
 using Windows.UI.Xaml.Shapes;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
+/*
+TODO    
+que se cambie de color al original tras el flash
+cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidad
+guardar las secuencia de maquina y usuario
+iniciar flash al comienzo
+Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??)
+El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
+
+Extras v.63.2:
+Añadir sonidos al flash de la maquina y al click de la persona
+*/
 namespace simonSays_DI
 {
     /// <summary>
@@ -20,61 +42,46 @@ namespace simonSays_DI
         public MainPage()
         {
             this.InitializeComponent();
-            //DEFAULT
-            row1.Height = new GridLength(0);
-            row2.Height = new GridLength(0);
-            row3.Height = new GridLength(border.Height / 2);
-            row4.Height = new GridLength(border.Height / 2);
-            row5.Height = new GridLength(0);
-            row6.Height = new GridLength(0);
 
-            col1.Width = new GridLength(0);
-            col2.Width = new GridLength(0);
-            col3.Width = new GridLength(border.Width / 2);
-            col4.Width = new GridLength(border.Width / 2);
-            col5.Width = new GridLength(0);
-            col6.Width = new GridLength(0);
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
+            {
+                row1.Height = new GridLength(0);
+                row2.Height = new GridLength(0);
+                row3.Height = new GridLength(border.Height / 2);
+                row4.Height = new GridLength(border.Height / 2);
+                row5.Height = new GridLength(0);
+                row6.Height = new GridLength(0);
+
+                col1.Width = new GridLength(0);
+                col2.Width = new GridLength(0);
+                col3.Width = new GridLength(border.Width / 2);
+                col4.Width = new GridLength(border.Width / 2);
+                col5.Width = new GridLength(0);
+                col6.Width = new GridLength(0);
+            }
+            else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            {
+
+                row2.Height = new GridLength(0);
+                row3.Height = new GridLength(250 / 2);
+                row4.Height = new GridLength(250 / 2);
+                row5.Height = new GridLength(0);
+
+                col2.Width = new GridLength(0);
+                col3.Width = new GridLength(250 / 2);
+                col4.Width = new GridLength(250 / 2);
+                col5.Width = new GridLength(0);
+
+            }
+
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
-        private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {   
+        private async void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
             if (op1.IsSelected)
             {
-                //rec36.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec35.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec34.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec33.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec32.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec31.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec17.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec30.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec18.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec29.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec19.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec28.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec20.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec27.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec21.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec22.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec23.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec24.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec25.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec26.Fill = new SolidColorBrush(Colors.LightGray);
-
-                //rec5.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec16.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec15.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec14.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec6.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec13.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec7.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec12.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec8.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec9.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec10.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec11.Fill = new SolidColorBrush(Colors.LightGray);
 
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
@@ -91,31 +98,17 @@ namespace simonSays_DI
                 col6.Width = new GridLength(0);
 
 
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(1, 4);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
+
             }
 
 
             if (op2.IsSelected)
             {
-                //rec36.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec35.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec34.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec33.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec32.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec31.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec17.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec30.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec18.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec29.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec19.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec28.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec20.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec27.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec21.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec22.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec23.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec24.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec25.Fill = new SolidColorBrush(Colors.LightGray);
-                //rec26.Fill = new SolidColorBrush(Colors.LightGray);
 
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(border.Height / 4);
@@ -130,23 +123,36 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 4);
                 col5.Width = new GridLength(border.Width / 4);
                 col6.Width = new GridLength(0);
+
+                //Aqui hay que hacer el aleatorio hasta 16
+
+                Random random = new Random();
+                int rectPintar = random.Next(1, 16);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
             }
 
             if (op3.IsSelected)
             {
-                row1.Height = new GridLength(border.Height/6);
+                row1.Height = new GridLength(border.Height / 6);
                 row2.Height = new GridLength(border.Height / 6);
                 row3.Height = new GridLength(border.Height / 6);
                 row4.Height = new GridLength(border.Height / 6);
                 row5.Height = new GridLength(border.Height / 6);
                 row6.Height = new GridLength(border.Height / 6);
 
-                col1.Width = new GridLength(border.Width/6);
+                col1.Width = new GridLength(border.Width / 6);
                 col2.Width = new GridLength(border.Width / 6);
                 col3.Width = new GridLength(border.Width / 6);
                 col4.Width = new GridLength(border.Width / 6);
                 col5.Width = new GridLength(border.Width / 6);
                 col6.Width = new GridLength(border.Width / 6);
+
+                //Aqui hay que hacer el aleatorio hasta 36
+                Random random = new Random();
+                int rectPintar = random.Next(1, 36);
+                await Task.Delay(250);
+                secuenciaFlash(rectPintar);
 
             }
 
@@ -158,6 +164,7 @@ namespace simonSays_DI
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
+<<<<<<< HEAD
             //MessageDialog dialog = new MessageDialog("Has pulsadoooooooooo!!!!!", "Funcionaaaaaaaaaaaaa");        
             //dialog.ShowAsync();
 
@@ -175,6 +182,14 @@ namespace simonSays_DI
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+=======
+
+
+            Rectangle rectanClicked = sender as Rectangle;
+                        
+            //BOTONES ROJOS
+             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+>>>>>>> master
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -228,7 +243,49 @@ namespace simonSays_DI
                 await Task.Delay(250);
                 rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
             }
+<<<<<<< HEAD
+=======
 
+        }
+        /// <summary>
+        /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
+        /// </summary>
+        /// <param name="numAleatorio"></param>
+        private void secuenciaFlash(int numAleatorio)
+        {
+            Rectangle rectanSelected = new Rectangle();
+
+            String nombreRectangulo = "rec"+numAleatorio;
+            
+            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+        }
+>>>>>>> master
+
+        //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
+        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
+        {
+
+            if (parent == null) return null;
+
+            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
+            {
+                return (T)parent;
+            }
+            T result = null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+
+                if (FindControl<T>(child, targetType, ControlName) != null)
+                {
+                    result = FindControl<T>(child, targetType, ControlName);
+                    break;
+                }
+            }
+            return result;
         }
     }
 }
