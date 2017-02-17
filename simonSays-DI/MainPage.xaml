@@ -71,7 +71,7 @@
                     <Rectangle x:Name="rec1"  Tag="1" Grid.Column="2" Grid.Row="2" Fill="#D50000" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec3"  Tag="3" Grid.Column="2" Grid.Row="3" Fill="#0078D7" Tapped="rect_tapped"></Rectangle>
                     <Rectangle x:Name="rec13" Tag="13" Grid.Column="2" Grid.Row="4" Fill="#5B83D8" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec29" Tag="29" Grid.Column="2" Grid.Row="5" Fill="#0078D7"></Rectangle>
+                    <Rectangle x:Name="rec29" Tag="29" Grid.Column="2" Grid.Row="5" Fill="#0078D7" Tapped="rect_tapped"></Rectangle>
                     
                     <!--Cuarta columna-->
                     <Rectangle x:Name="rec19" Tag="19" Grid.Column="3" Grid.Row="0" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
