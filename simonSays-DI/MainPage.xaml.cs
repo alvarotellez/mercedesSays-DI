@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Shapes;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
+//Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
 /*
 TODO    
-que se cambie de color al original tras el flash
-cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidad
-guardar las secuencia de maquina y usuario
-iniciar flash al comienzo
-Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??)
+OK: que se cambie de color al original tras el flash (Mercedes)
+OK: cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidadn (Mercedes)
+guardar las secuencia de maquina y usuario (Alvaro)
+iniciar flash al comienzo (Mercedes)
+Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
 El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
 
 Extras v.63.2:
@@ -55,6 +55,11 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
+
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(1, 4);
+                secuenciaFlash(rectPintar);
             }
             else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
@@ -68,6 +73,11 @@ namespace simonSays_DI
                 col3.Width = new GridLength(250 / 2);
                 col4.Width = new GridLength(250 / 2);
                 col5.Width = new GridLength(0);
+
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(1, 4);
+                secuenciaFlash(rectPintar);
 
             }
 
@@ -245,15 +255,21 @@ namespace simonSays_DI
         /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
         /// </summary>
         /// <param name="numAleatorio"></param>
-        private void secuenciaFlash(int numAleatorio)
+        private async void secuenciaFlash(int numAleatorio)
         {
             Rectangle rectanSelected = new Rectangle();
 
-            String nombreRectangulo = "rec"+numAleatorio;
-            
-            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+            String nombreRectangulo = "rec" + numAleatorio;
 
-            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+            Brush colorPrevio = rectangulo.Fill;
+
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 147, 210, 204));//(249, 4, 225) //(3, 236, 249) 
+            //COLOR DE LA BARRA//77, 182, 172 //(183, 225, 221) //(147, 210, 204) // (45, 108, 102)
+            // rectangulo.Visibility = Visibility.Collapsed;
+            await Task.Delay(500);
+            rectangulo.Fill = colorPrevio;
+          //  rectangulo.Visibility = Visibility.Visible;
         }
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
@@ -285,6 +301,10 @@ namespace simonSays_DI
         {
             var dialog = new MessageDialog("Has perdidoooooo :((((((");
             await dialog.ShowAsync();
+        }
+
+        private async void retrasar(int milisegundos) {
+            await Task.Delay(milisegundos);
         }
     }
 }
