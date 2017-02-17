@@ -28,7 +28,7 @@
                 </ComboBox>
             </RelativePanel>
             <Border x:Name="border" Grid.Column="0" Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="Gray"
-                    Width="{Binding ElementName=Row1, Path=ActualWidth}"
+                    Width="250"
                     Height="{Binding ElementName=border, Path=ActualWidth}"
                    >
                 <!--Width="{Binding ActualWidth, ElementName=Row1, Mode=OneWay}"-->
