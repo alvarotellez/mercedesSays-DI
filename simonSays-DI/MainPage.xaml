@@ -82,20 +82,20 @@
                     <Rectangle x:Name="rec28" Tag="28" Grid.Column="3" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
                     
                     <!--Quinta columna-->
-                    <Rectangle x:Name="rec20" Grid.Column="4" Grid.Row="0" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec8" Grid.Column="4" Grid.Row="1" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec9" Grid.Column="4" Grid.Row="2" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec10" Grid.Column="4" Grid.Row="3" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec11" Grid.Column="4" Grid.Row="4" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec27" Grid.Column="4" Grid.Row="5" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec20" Tag="20" Grid.Column="4" Grid.Row="0" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec8" Tag="8" Grid.Column="4" Grid.Row="1" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec9" Tag="9" Grid.Column="4" Grid.Row="2" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec10" Tag="10" Grid.Column="4" Grid.Row="3" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec11" Tag="11" Grid.Column="4" Grid.Row="4" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec27" Tag="27" Grid.Column="4" Grid.Row="5" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
                     
                     <!--Sexta columna-->
-                    <Rectangle x:Name="rec21" Grid.Column="5" Grid.Row="0" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec22" Grid.Column="5" Grid.Row="1" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec23" Grid.Column="5" Grid.Row="2" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec24" Grid.Column="5" Grid.Row="3" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec25" Grid.Column="5" Grid.Row="4" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec26" Grid.Column="5" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec21" Tag="21" Grid.Column="5" Grid.Row="0" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec22" Tag="22" Grid.Column="5" Grid.Row="1" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec23" Tag="23" Grid.Column="5" Grid.Row="2" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec24" Tag="24" Grid.Column="5" Grid.Row="3" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec25" Tag="25" Grid.Column="5" Grid.Row="4" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec26" Tag="26" Grid.Column="5" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
                     
                 </Grid>
             </Border>

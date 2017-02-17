@@ -32,9 +32,13 @@ namespace simonSays_DI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int rectPintar;
+        Boolean haGanado;
+        int contador = 0;
         public MainPage()
         {
             this.InitializeComponent();
+
 
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
@@ -76,6 +80,8 @@ namespace simonSays_DI
             if (op1.IsSelected)
             {
 
+                
+
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -96,6 +102,8 @@ namespace simonSays_DI
                 int rectPintar = random.Next(1, 4);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
+
+
 
             }
 
@@ -120,7 +128,7 @@ namespace simonSays_DI
                 //Aqui hay que hacer el aleatorio hasta 16
 
                 Random random = new Random();
-                int rectPintar = random.Next(1, 16);
+                rectPintar = random.Next(1, 16);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
             }
@@ -142,10 +150,10 @@ namespace simonSays_DI
                 col6.Width = new GridLength(border.Width / 6);
 
                 //Aqui hay que hacer el aleatorio hasta 36
-                Random random = new Random();
-                int rectPintar = random.Next(1, 36);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
+                    Random random = new Random();
+                    rectPintar = random.Next(1, 36);
+                    await Task.Delay(250);
+                    secuenciaFlash(rectPintar);
 
             }
 
@@ -160,9 +168,24 @@ namespace simonSays_DI
 
 
             Rectangle rectanClicked = sender as Rectangle;
-                        
+
+            int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
+            if (rectPintar == rectanguloElegido )
+            {
+                haGanado = true;
+                contador++;
+                txtScore.Text=contador.ToString();
+            }
+            else
+            {
+                haGanado = false;
+                mostrarMensaje();
+            }
+
+
+
             //BOTONES ROJOS
-             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+            if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -256,6 +279,12 @@ namespace simonSays_DI
                 }
             }
             return result;
+        }
+
+        public async void mostrarMensaje()
+        {
+            var dialog = new MessageDialog("Has perdidoooooo :((((((");
+            await dialog.ShowAsync();
         }
     }
 }
