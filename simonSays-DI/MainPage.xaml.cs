@@ -16,16 +16,17 @@ using Windows.UI.Popups;
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
 /*
 TODO    
-OK: que se cambie de color al original tras el flash (Mercedes)
+OK: que se cambie de color al original tras el flash (Mercedes) 
 OK: cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidadn (Mercedes)
-guardar las secuencia de maquina y usuario (Alvaro)
-iniciar flash al comienzo (Mercedes)
+guardar las secuencia de maquina y usuario (Mercedes)
+OK: iniciar flash al comienzo (Alvaro)
 Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
-El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
-Hay que poner un play o algo y evitar que se empiece justo al cargar, usar btn Refresh en vez de play?? o poner 2 btns??
+OK: Hay que poner un play o algo y evitar que se empiece justo al cargar, usar btn Refresh en vez de play?? o poner 2 btns??
 deshabilitar play hasta que le de a refresh (2 btns)
+
 Extras v.63.2:
 Añadir sonidos al flash de la maquina y al click de la persona
+El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
 */
 namespace simonSays_DI
 {
@@ -121,7 +122,7 @@ namespace simonSays_DI
                 col6.Width = new GridLength(0);
 
             }
-
+            
             if (op3.IsSelected)
             {
                 row1.Height = new GridLength(border.Height / 6);
@@ -141,7 +142,11 @@ namespace simonSays_DI
 
         }
 
-
+        /// <summary>
+        /// Metodo que se encarga de pintar el rectangulo de gris para que el usuario sepa que rectangulo tiene que pulsar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
             Rectangle rectanClicked = sender as Rectangle;
@@ -232,12 +237,11 @@ namespace simonSays_DI
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
             Brush colorPrevio = rectangulo.Fill;
 
-            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 147, 210, 204));//(249, 4, 225) //(3, 236, 249) 
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 252, 11, 147));//(249, 4, 225) //(3, 236, 249) 
             //COLOR DE LA BARRA//77, 182, 172 //(183, 225, 221) //(147, 210, 204) // (45, 108, 102)
-            // rectangulo.Visibility = Visibility.Collapsed;
+            // rectangulo.Visibility = Visibility.Collapsed; //000-247-000 //252, 11, 147
             await Task.Delay(500);
             rectangulo.Fill = colorPrevio;
-          //  rectangulo.Visibility = Visibility.Visible;
         }
 
 
@@ -281,10 +285,6 @@ namespace simonSays_DI
             var dialog = new MessageDialog("Has perdidoooooo :((((((");
             await dialog.ShowAsync();
         }
-
-        private async void retrasar(int milisegundos) {
-            await Task.Delay(milisegundos);
-        }
         /// <summary>
         /// Metodo que reinicia la actividad principal después de pulsar el btn de jugar de nuevo
         /// </summary>
@@ -294,17 +294,28 @@ namespace simonSays_DI
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+        /// <summary>
+        /// Metodo que pinta un rectangulo aleatorio dentro del tablero
+        /// </summary>
+        /// <param name="numRango">Numero total de rectangulos que hay en el tablero que el usuario ha elegido</param>
         public void pintarRectangulo(int numRango)
-        {
-            
+        {           
             Random random = new Random();
             rectPintar = random.Next(1, numRango);
             secuenciaFlash(rectPintar);
         }
-
+        /// <summary>
+        /// SE CORRESPONDE CON EL BTN PLAY EN EL XAML
+        /// Metodo que se ejecuta despues de que el usuario pulse el btn de jugar
+        /// Cuando pulsa jugar se pintan los recuadros aleatorios, llamando al metodo pintarRectangulo y el numero total de rectangulos de ese tablero
+        /// Otra accion que realiza es que bloquea el combobox y pone enabled el btn para jugar de nuevo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnjugar_Click(object sender, RoutedEventArgs e)
         {
             btnJuegoNuevo.IsEnabled = true;
+            btnjugar.IsEnabled = false;
             comboNivel.IsEnabled = false;
             if (op1.IsSelected)
             {
