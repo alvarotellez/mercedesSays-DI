@@ -16,7 +16,7 @@
             
             <!--Stack Panel de la cabecera del nivel y el resultado-->
             <RelativePanel Background="#4DB6AC">
-                <AppBarButton Icon="Refresh" Label="Jugar de nuevo" RelativePanel.AlignLeftWithPanel="True" Click="AppBarButton_Click" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="25,0,0,0" />
+                <AppBarButton Icon="Play" Label="Jugar" RelativePanel.AlignLeftWithPanel="True" Click="AppBarButton_Click" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="25,0,0,0" />
                 <TextBlock x:Name="lblScore" Text="Puntuación:" FontSize="18" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" VerticalAlignment="Center" Margin="25,0,0,0"></TextBlock>
                 <TextBlock x:Name="txtScore" Text="0" RelativePanel.RightOf="lblScore" RelativePanel.AlignVerticalCenterWithPanel="True" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0" ></TextBlock>
                 

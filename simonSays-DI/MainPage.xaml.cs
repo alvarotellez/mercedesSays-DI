@@ -22,7 +22,8 @@ guardar las secuencia de maquina y usuario (Alvaro)
 iniciar flash al comienzo (Mercedes)
 Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
 El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
-
+Hay que poner un play o algo y evitar que se empiece justo al cargar, usar btn Refresh en vez de play?? o poner 2 btns??
+deshabilitar play hasta que le de a refresh (2 btns)
 Extras v.63.2:
 Añadir sonidos al flash de la maquina y al click de la persona
 */
