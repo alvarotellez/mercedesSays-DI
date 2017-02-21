@@ -70,7 +70,7 @@ namespace simonSays_DI
 
                 //Aqui tengo que hacer el aleatorio hasta 4
                 Random random = new Random();
-                int rectPintar = random.Next(1, 4);
+                 rectPintar = random.Next(1, 4);
                 secuenciaFlash(rectPintar);
             }
             else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
@@ -88,7 +88,7 @@ namespace simonSays_DI
 
                 //Aqui tengo que hacer el aleatorio hasta 4
                 Random random = new Random();
-                int rectPintar = random.Next(1, 4);
+                 rectPintar = random.Next(1, 4);
                 secuenciaFlash(rectPintar);
 
             }
@@ -121,7 +121,7 @@ namespace simonSays_DI
 
                 //Aqui tengo que hacer el aleatorio hasta 4
                 Random random = new Random();
-                int rectPintar = random.Next(1, 4);
+                 rectPintar = random.Next(1, 4);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
 
@@ -195,6 +195,7 @@ namespace simonSays_DI
             Rectangle rectanClicked = sender as Rectangle;
 >>>>>>> master
 
+<<<<<<< HEAD
 
             Rectangle rectanClicked = sender as Rectangle;
 
@@ -207,12 +208,14 @@ namespace simonSays_DI
 
             rectanClicked = sender as Rectangle;
 
+=======
+>>>>>>> master
             int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
-            if (rectPintar == rectanguloElegido )
+            if (rectPintar == rectanguloElegido)
             {
                 haGanado = true;
                 contador++;
-                txtScore.Text=contador.ToString();
+                txtScore.Text = contador.ToString();
             }
             else
             {
@@ -220,6 +223,8 @@ namespace simonSays_DI
                 mostrarMensaje();
             }
 
+            ////BOTONES ROJOS
+            //if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
 
 
             //BOTONES ROJOS
