@@ -169,16 +169,10 @@ namespace simonSays_DI
             }
 
         }
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
+
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-
-
-
             Rectangle rectanClicked = sender as Rectangle;
 
             int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
@@ -192,11 +186,9 @@ namespace simonSays_DI
             {
                 haGanado = false;
                 mostrarMensaje();
+
+                comboNivel.IsEnabled = false;
             }
-
-            ////BOTONES ROJOS
-            //if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
-
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
@@ -281,6 +273,14 @@ namespace simonSays_DI
 
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
+        /// <summary>
+        /// Metodo que busca un control con un nombre concreto en todo el xaml dependiendo del tipo de control que sea
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="targetType"></param>
+        /// <param name="ControlName"></param>
+        /// <returns></returns>
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
         {
 
@@ -304,7 +304,9 @@ namespace simonSays_DI
             }
             return result;
         }
-
+        /// <summary>
+        /// Metodo que muestra un mensaje de error cuando el usuario falla
+        /// </summary>
         public async void mostrarMensaje()
         {
             var dialog = new MessageDialog("Has perdidoooooo :((((((");
@@ -313,6 +315,15 @@ namespace simonSays_DI
 
         private async void retrasar(int milisegundos) {
             await Task.Delay(milisegundos);
+        }
+        /// <summary>
+        /// Metodo que reinicia la actividad principal después de pulsar el btn de jugar de nuevo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }
