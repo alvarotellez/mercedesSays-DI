@@ -39,9 +39,12 @@ namespace simonSays_DI
         int contador = 0;
         public MainPage()
         {
+
             this.InitializeComponent();
+            //btnjugar.IsEnabled = false;
+            //btnRefresh.IsEnabled = false;
 
-
+            
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
                 row1.Height = new GridLength(0);
@@ -57,11 +60,6 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
-
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                secuenciaFlash(rectPintar);
             }
             else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
@@ -76,24 +74,18 @@ namespace simonSays_DI
                 col4.Width = new GridLength(250 / 2);
                 col5.Width = new GridLength(0);
 
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                secuenciaFlash(rectPintar);
+
 
             }
-
-
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
-        private async void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            btnjugar.IsEnabled = true;
+        
             if (op1.IsSelected)
             {
 
-                
-
+                        
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -107,15 +99,6 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
-
-
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
-
-
 
             }
 
@@ -137,12 +120,6 @@ namespace simonSays_DI
                 col5.Width = new GridLength(border.Width / 4);
                 col6.Width = new GridLength(0);
 
-                //Aqui hay que hacer el aleatorio hasta 16
-
-                Random random = new Random();
-                rectPintar = random.Next(1, 16);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
             }
 
             if (op3.IsSelected)
@@ -160,13 +137,6 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 6);
                 col5.Width = new GridLength(border.Width / 6);
                 col6.Width = new GridLength(border.Width / 6);
-
-                //Aqui hay que hacer el aleatorio hasta 36
-                    Random random = new Random();
-                    rectPintar = random.Next(1, 36);
-                    await Task.Delay(250);
-                    secuenciaFlash(rectPintar);
-
             }
 
         }
@@ -186,9 +156,7 @@ namespace simonSays_DI
             else
             {
                 haGanado = false;
-                mostrarMensaje();
-
-                comboNivel.IsEnabled = false;
+                mostrarMensaje();                
             }
 
             //BOTONES ROJOS
@@ -326,5 +294,29 @@ namespace simonSays_DI
         {
             this.Frame.Navigate(typeof(MainPage));
         }
-    }
+        public void pintarRectangulo(int numRango)
+        {
+            
+            Random random = new Random();
+            rectPintar = random.Next(1, numRango);
+            secuenciaFlash(rectPintar);
+        }
+
+        private void btnjugar_Click(object sender, RoutedEventArgs e)
+        {
+            btnJuegoNuevo.IsEnabled = true;
+            comboNivel.IsEnabled = false;
+            if (op1.IsSelected)
+            {
+                pintarRectangulo(4);
+            } else if (op2.IsSelected)
+                {
+                    pintarRectangulo(16);
+                }
+                else if (op3.IsSelected)
+                {
+                    pintarRectangulo(36);
+                }
+            }
+        }
 }
