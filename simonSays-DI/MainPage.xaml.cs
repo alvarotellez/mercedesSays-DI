@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 ﻿using System;
+=======
+﻿
+using System.Threading.Tasks;
+>>>>>>> master
 using Windows.Foundation;
+using System;
 using Windows.System.Profile;
 using Windows.UI;
 using Windows.UI.Popups;
@@ -8,19 +14,24 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+<<<<<<< HEAD
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Media.Animation;
+=======
+using Windows.UI.Xaml.Shapes;
+using Windows.UI.Popups;
+>>>>>>> master
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
+//Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
 /*
 TODO    
-que se cambie de color al original tras el flash
-cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidad
-guardar las secuencia de maquina y usuario
-iniciar flash al comienzo
-Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??)
+OK: que se cambie de color al original tras el flash (Mercedes)
+OK: cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidadn (Mercedes)
+guardar las secuencia de maquina y usuario (Alvaro)
+iniciar flash al comienzo (Mercedes)
+Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
 El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
 
 Extras v.63.2:
@@ -33,9 +44,13 @@ namespace simonSays_DI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int rectPintar;
+        Boolean haGanado;
+        int contador = 0;
         public MainPage()
         {
             this.InitializeComponent();
+
 
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
@@ -52,6 +67,11 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
+
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(1, 4);
+                secuenciaFlash(rectPintar);
             }
             else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
@@ -66,6 +86,11 @@ namespace simonSays_DI
                 col4.Width = new GridLength(250 / 2);
                 col5.Width = new GridLength(0);
 
+                //Aqui tengo que hacer el aleatorio hasta 4
+                Random random = new Random();
+                int rectPintar = random.Next(1, 4);
+                secuenciaFlash(rectPintar);
+
             }
 
 
@@ -76,6 +101,8 @@ namespace simonSays_DI
 
             if (op1.IsSelected)
             {
+
+                
 
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
@@ -97,6 +124,8 @@ namespace simonSays_DI
                 int rectPintar = random.Next(1, 4);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
+
+
 
             }
 
@@ -121,7 +150,7 @@ namespace simonSays_DI
                 //Aqui hay que hacer el aleatorio hasta 16
 
                 Random random = new Random();
-                int rectPintar = random.Next(1, 16);
+                rectPintar = random.Next(1, 16);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
             }
@@ -143,10 +172,10 @@ namespace simonSays_DI
                 col6.Width = new GridLength(border.Width / 6);
 
                 //Aqui hay que hacer el aleatorio hasta 36
-                Random random = new Random();
-                int rectPintar = random.Next(1, 36);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
+                    Random random = new Random();
+                    rectPintar = random.Next(1, 36);
+                    await Task.Delay(250);
+                    secuenciaFlash(rectPintar);
 
             }
 
@@ -158,12 +187,47 @@ namespace simonSays_DI
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
+<<<<<<< HEAD
+=======
+
+
+
+            Rectangle rectanClicked = sender as Rectangle;
+>>>>>>> master
 
 
             Rectangle rectanClicked = sender as Rectangle;
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+<<<<<<< HEAD
+=======
+
+
+
+            rectanClicked = sender as Rectangle;
+
+            int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
+            if (rectPintar == rectanguloElegido )
+            {
+                haGanado = true;
+                contador++;
+                txtScore.Text=contador.ToString();
+            }
+            else
+            {
+                haGanado = false;
+                mostrarMensaje();
+            }
+
+
+
+            //BOTONES ROJOS
+            if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+
+             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+
+>>>>>>> master
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -223,16 +287,31 @@ namespace simonSays_DI
         /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
         /// </summary>
         /// <param name="numAleatorio"></param>
-        private void secuenciaFlash(int numAleatorio)
+        private async void secuenciaFlash(int numAleatorio)
         {
             Rectangle rectanSelected = new Rectangle();
 
             String nombreRectangulo = "rec" + numAleatorio;
+<<<<<<< HEAD
 
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+=======
+>>>>>>> master
 
-            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+            Brush colorPrevio = rectangulo.Fill;
+
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 147, 210, 204));//(249, 4, 225) //(3, 236, 249) 
+            //COLOR DE LA BARRA//77, 182, 172 //(183, 225, 221) //(147, 210, 204) // (45, 108, 102)
+            // rectangulo.Visibility = Visibility.Collapsed;
+            await Task.Delay(500);
+            rectangulo.Fill = colorPrevio;
+          //  rectangulo.Visibility = Visibility.Visible;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
@@ -259,6 +338,7 @@ namespace simonSays_DI
             return result;
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Método que muestra un mensaje cuando pierdes y de fondo crea la mayor epilepsia de tu vida
         /// </summary>
@@ -292,6 +372,16 @@ namespace simonSays_DI
             embolia();
             
             
+=======
+        public async void mostrarMensaje()
+        {
+            var dialog = new MessageDialog("Has perdidoooooo :((((((");
+            await dialog.ShowAsync();
+        }
+
+        private async void retrasar(int milisegundos) {
+            await Task.Delay(milisegundos);
+>>>>>>> master
         }
     }
 }
