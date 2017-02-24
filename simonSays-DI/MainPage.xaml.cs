@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Popups;
+using System.Collections.Generic;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
@@ -38,6 +39,12 @@ namespace simonSays_DI
         int rectPintar;
         Boolean haGanado;
         int contador = 0;
+        int turno = 0;
+        List<int> secuenciaMaquina = new List<int>(); //aqui guardo la secuencia de flash
+        int tapContador=0;
+        int tamanno= 0;
+
+
         public MainPage()
         {
 
@@ -149,80 +156,47 @@ namespace simonSays_DI
         /// <param name="e"></param>
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
+            
             Rectangle rectanClicked = sender as Rectangle;
 
+            Brush colorPrevio = rectanClicked.Fill;
+
+            rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
+            await Task.Delay(250);
+            rectanClicked.Fill = colorPrevio;
+
             int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
-            if (rectPintar == rectanguloElegido)
-            {
-                haGanado = true;
-                contador++;
-                txtScore.Text = contador.ToString();
-            }
-            else
-            {
-                haGanado = false;
-                mostrarMensaje();                
-            }
 
-            //BOTONES ROJOS
-            if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+                if (secuenciaMaquina[tapContador] == rectanguloElegido)
+                {
+                    tapContador++;
+                    haGanado = true;
+                    contador++;
+                    txtScore.Text = contador.ToString();
+                    start(tamanno);
 
-             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
+                }
+                else
+                {
+                    haGanado = false;
+                    mostrarMensaje();
+                }
 
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 213, 0, 0));
-            }
-            if (rectanClicked.Name == "rec6" || rectanClicked.Name == "rec17" || rectanClicked.Name == "rec35" || rectanClicked.Name == "rec16")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 46, 24));
-            }
+        }
 
-            //BOTONES VERDES
-            if (rectanClicked.Name == "rec19" || rectanClicked.Name == "rec21" || rectanClicked.Name == "rec8" || rectanClicked.Name == "rec2" || rectanClicked.Name == "rec23")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 16, 124, 16));
-            }
-            if (rectanClicked.Name == "rec20" || rectanClicked.Name == "rec22" || rectanClicked.Name == "rec7" || rectanClicked.Name == "rec9")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 68, 195, 0));
-            }
-
-            //BOTONES AZULES
-            if (rectanClicked.Name == "rec33" || rectanClicked.Name == "rec3" || rectanClicked.Name == "rec14" || rectanClicked.Name == "rec31" || rectanClicked.Name == "rec29")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 0, 120, 215));
-            }
-            if (rectanClicked.Name == "rec15" || rectanClicked.Name == "rec32" || rectanClicked.Name == "rec13" || rectanClicked.Name == "rec30")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 91, 131, 216));
-            }
-
-            //BOTONES AMARILLOS
-            if (rectanClicked.Name == "rec4" || rectanClicked.Name == "rec24" || rectanClicked.Name == "rec11" || rectanClicked.Name == "rec28" || rectanClicked.Name == "rec26")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 185, 0));
-            }
-            if (rectanClicked.Name == "rec10" || rectanClicked.Name == "rec12" || rectanClicked.Name == "rec27" || rectanClicked.Name == "rec25")
-            {
-                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-                await Task.Delay(250);
-                rectanClicked.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
-            }
-
+        
+        /// <summary>
+        /// Metodo que pinta un rectangulo aleatorio dentro del tablero
+        /// </summary>
+        /// <param name="numRango">Numero total de rectangulos que hay en el tablero que el usuario ha elegido</param>
+        public async void pintarRectangulo(int numRango)
+        {
+            Random random = new Random();
+            rectPintar = random.Next(1, numRango);
+            await Task.Delay(1000);
+            secuenciaFlash(rectPintar);
+            //guardo el Tag del rectangulo que pinto
+            secuenciaMaquina.Add(rectPintar);
         }
         /// <summary>
         /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
@@ -235,6 +209,7 @@ namespace simonSays_DI
             String nombreRectangulo = "rec" + numAleatorio;
 
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+            await Task.Delay(500);
             Brush colorPrevio = rectangulo.Fill;
 
             rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 252, 11, 147));//(249, 4, 225) //(3, 236, 249) 
@@ -294,16 +269,8 @@ namespace simonSays_DI
         {
             this.Frame.Navigate(typeof(MainPage));
         }
-        /// <summary>
-        /// Metodo que pinta un rectangulo aleatorio dentro del tablero
-        /// </summary>
-        /// <param name="numRango">Numero total de rectangulos que hay en el tablero que el usuario ha elegido</param>
-        public void pintarRectangulo(int numRango)
-        {           
-            Random random = new Random();
-            rectPintar = random.Next(1, numRango);
-            secuenciaFlash(rectPintar);
-        }
+
+
         /// <summary>
         /// SE CORRESPONDE CON EL BTN PLAY EN EL XAML
         /// Metodo que se ejecuta despues de que el usuario pulse el btn de jugar
@@ -317,17 +284,45 @@ namespace simonSays_DI
             btnJuegoNuevo.IsEnabled = true;
             btnjugar.IsEnabled = false;
             comboNivel.IsEnabled = false;
+
             if (op1.IsSelected)
             {
-                pintarRectangulo(4);
+                tamanno = 4;
+
             } else if (op2.IsSelected)
                 {
-                    pintarRectangulo(16);
+                    tamanno = 16;
                 }
                 else if (op3.IsSelected)
                 {
-                    pintarRectangulo(36);
+                    tamanno = 36;
                 }
+
+                start(tamanno);
             }
+                        
+
+        /// <summary>
+        /// Metodo que inicia el juego, se llamara desde btnJugar_Click
+        /// </summary>
+        private void start(int tamanno)
+        {
+                if (secuenciaMaquina.Count == 0) {
+                    pintarRectangulo(tamanno); //añade el tag a secuenciaMaquina y llama a secuenciaFlash()
+                    turno++;
+                } else {
+
+                    for (int i = 0; i <turno; i++)
+                    {
+                      secuenciaFlash(secuenciaMaquina[i]);//pintamos los rectangulos guardados en secuenciaMaquina           
+                    }
+                     pintarRectangulo(tamanno);//añade el tag a secuenciaMaquina y llama a secuenciaFlash()
+                     turno++;
+                }
+
+            tapContador = 0;
         }
+
+    }
+   
 }
