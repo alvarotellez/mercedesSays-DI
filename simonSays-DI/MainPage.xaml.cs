@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿using System;
-=======
-﻿
+﻿﻿using System;﻿
 using System.Threading.Tasks;
->>>>>>> master
 using Windows.Foundation;
 using System;
 using Windows.System.Profile;
@@ -14,14 +10,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-<<<<<<< HEAD
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Media.Animation;
-=======
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Popups;
->>>>>>> master
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
@@ -44,13 +37,14 @@ namespace simonSays_DI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         int rectPintar;
         Boolean haGanado;
         int contador = 0;
         public MainPage()
         {
-            this.InitializeComponent();
 
+            this.InitializeComponent();
 
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
@@ -102,8 +96,6 @@ namespace simonSays_DI
             if (op1.IsSelected)
             {
 
-                
-
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -118,18 +110,15 @@ namespace simonSays_DI
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
 
-
                 //Aqui tengo que hacer el aleatorio hasta 4
                 Random random = new Random();
                  rectPintar = random.Next(1, 4);
                 await Task.Delay(250);
                 secuenciaFlash(rectPintar);
 
-
-
             }
 
-
+        
             if (op2.IsSelected)
             {
 
@@ -187,29 +176,24 @@ namespace simonSays_DI
 
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-<<<<<<< HEAD
-=======
 
 
 
-            Rectangle rectanClicked = sender as Rectangle;
->>>>>>> master
-
-<<<<<<< HEAD
 
             Rectangle rectanClicked = sender as Rectangle;
+
+
+            
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
-<<<<<<< HEAD
-=======
+
 
 
 
             rectanClicked = sender as Rectangle;
 
-=======
->>>>>>> master
+
             int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
             if (rectPintar == rectanguloElegido)
             {
@@ -232,7 +216,7 @@ namespace simonSays_DI
 
              if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
 
->>>>>>> master
+
             {
                 rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
                 await Task.Delay(250);
@@ -297,11 +281,10 @@ namespace simonSays_DI
             Rectangle rectanSelected = new Rectangle();
 
             String nombreRectangulo = "rec" + numAleatorio;
-<<<<<<< HEAD
 
-            var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
-=======
->>>>>>> master
+
+            
+
 
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
             Brush colorPrevio = rectangulo.Fill;
@@ -313,10 +296,7 @@ namespace simonSays_DI
             rectangulo.Fill = colorPrevio;
           //  rectangulo.Visibility = Visibility.Visible;
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
@@ -343,7 +323,7 @@ namespace simonSays_DI
             return result;
         }
 
-<<<<<<< HEAD
+
         /// <summary>
         /// Método que muestra un mensaje cuando pierdes y de fondo crea la mayor epilepsia de tu vida
         /// </summary>
@@ -375,9 +355,9 @@ namespace simonSays_DI
         {
 
             embolia();
-            
-            
-=======
+
+        } 
+
         public async void mostrarMensaje()
         {
             var dialog = new MessageDialog("Has perdidoooooo :((((((");
@@ -386,7 +366,7 @@ namespace simonSays_DI
 
         private async void retrasar(int milisegundos) {
             await Task.Delay(milisegundos);
->>>>>>> master
+
         }
     }
 }
