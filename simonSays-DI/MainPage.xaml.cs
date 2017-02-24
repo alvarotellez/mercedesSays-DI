@@ -20,15 +20,17 @@ using Windows.UI.Popups;
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
 /*
 TODO    
-OK: que se cambie de color al original tras el flash (Mercedes)
+OK: que se cambie de color al original tras el flash (Mercedes) 
 OK: cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidadn (Mercedes)
-guardar las secuencia de maquina y usuario (Alvaro)
-iniciar flash al comienzo (Mercedes)
+guardar las secuencia de maquina y usuario (Mercedes)
+OK: iniciar flash al comienzo (Alvaro)
 Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
-El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
+OK: Hay que poner un play o algo y evitar que se empiece justo al cargar, usar btn Refresh en vez de play?? o poner 2 btns??
+deshabilitar play hasta que le de a refresh (2 btns)
 
 Extras v.63.2:
 Añadir sonidos al flash de la maquina y al click de la persona
+El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
 */
 namespace simonSays_DI
 {
@@ -45,7 +47,10 @@ namespace simonSays_DI
         {
 
             this.InitializeComponent();
+            //btnjugar.IsEnabled = false;
+            //btnRefresh.IsEnabled = false;
 
+            
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
                 row1.Height = new GridLength(0);
@@ -61,11 +66,6 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
-
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                secuenciaFlash(rectPintar);
             }
             else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
@@ -80,22 +80,18 @@ namespace simonSays_DI
                 col4.Width = new GridLength(250 / 2);
                 col5.Width = new GridLength(0);
 
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                secuenciaFlash(rectPintar);
+
 
             }
-
-
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1500, 1550));
         }
-        private async void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            btnjugar.IsEnabled = true;
+        
             if (op1.IsSelected)
             {
 
+                        
                 row1.Height = new GridLength(0);
                 row2.Height = new GridLength(0);
                 row3.Height = new GridLength(border.Height / 2);
@@ -109,12 +105,6 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 2);
                 col5.Width = new GridLength(0);
                 col6.Width = new GridLength(0);
-
-                //Aqui tengo que hacer el aleatorio hasta 4
-                Random random = new Random();
-                 rectPintar = random.Next(1, 4);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
 
             }
 
@@ -136,14 +126,8 @@ namespace simonSays_DI
                 col5.Width = new GridLength(border.Width / 4);
                 col6.Width = new GridLength(0);
 
-                //Aqui hay que hacer el aleatorio hasta 16
-
-                Random random = new Random();
-                rectPintar = random.Next(1, 16);
-                await Task.Delay(250);
-                secuenciaFlash(rectPintar);
             }
-
+            
             if (op3.IsSelected)
             {
                 row1.Height = new GridLength(border.Height / 6);
@@ -159,27 +143,17 @@ namespace simonSays_DI
                 col4.Width = new GridLength(border.Width / 6);
                 col5.Width = new GridLength(border.Width / 6);
                 col6.Width = new GridLength(border.Width / 6);
-
-                //Aqui hay que hacer el aleatorio hasta 36
-                    Random random = new Random();
-                    rectPintar = random.Next(1, 36);
-                    await Task.Delay(250);
-                    secuenciaFlash(rectPintar);
-
             }
 
         }
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
 
+        /// <summary>
+        /// Metodo que se encarga de pintar el rectangulo de gris para que el usuario sepa que rectangulo tiene que pulsar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-
-
-
-
             Rectangle rectanClicked = sender as Rectangle;
 
 
@@ -204,12 +178,8 @@ namespace simonSays_DI
             else
             {
                 haGanado = false;
-                mostrarMensaje();
+                mostrarMensaje();                
             }
-
-            ////BOTONES ROJOS
-            //if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
-
 
             //BOTONES ROJOS
             if (rectanClicked.Name == "rec1" || rectanClicked.Name == "rec5" || rectanClicked.Name == "rec18" || rectanClicked.Name == "rec34" || rectanClicked.Name == "rec36")
@@ -289,16 +259,23 @@ namespace simonSays_DI
             var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
             Brush colorPrevio = rectangulo.Fill;
 
-            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 147, 210, 204));//(249, 4, 225) //(3, 236, 249) 
+            rectangulo.Fill = new SolidColorBrush(Color.FromArgb(255, 252, 11, 147));//(249, 4, 225) //(3, 236, 249) 
             //COLOR DE LA BARRA//77, 182, 172 //(183, 225, 221) //(147, 210, 204) // (45, 108, 102)
-            // rectangulo.Visibility = Visibility.Collapsed;
+            // rectangulo.Visibility = Visibility.Collapsed; //000-247-000 //252, 11, 147
             await Task.Delay(500);
             rectangulo.Fill = colorPrevio;
-          //  rectangulo.Visibility = Visibility.Visible;
         }
 
 
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
+        /// <summary>
+        /// Metodo que busca un control con un nombre concreto en todo el xaml dependiendo del tipo de control que sea
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="targetType"></param>
+        /// <param name="ControlName"></param>
+        /// <returns></returns>
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
         {
 
@@ -363,10 +340,49 @@ namespace simonSays_DI
             var dialog = new MessageDialog("Has perdidoooooo :((((((");
             await dialog.ShowAsync();
         }
-
-        private async void retrasar(int milisegundos) {
-            await Task.Delay(milisegundos);
-
+        /// <summary>
+        /// Metodo que reinicia la actividad principal después de pulsar el btn de jugar de nuevo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
-    }
+        /// <summary>
+        /// Metodo que pinta un rectangulo aleatorio dentro del tablero
+        /// </summary>
+        /// <param name="numRango">Numero total de rectangulos que hay en el tablero que el usuario ha elegido</param>
+        public void pintarRectangulo(int numRango)
+        {           
+            Random random = new Random();
+            rectPintar = random.Next(1, numRango);
+            secuenciaFlash(rectPintar);
+        }
+        /// <summary>
+        /// SE CORRESPONDE CON EL BTN PLAY EN EL XAML
+        /// Metodo que se ejecuta despues de que el usuario pulse el btn de jugar
+        /// Cuando pulsa jugar se pintan los recuadros aleatorios, llamando al metodo pintarRectangulo y el numero total de rectangulos de ese tablero
+        /// Otra accion que realiza es que bloquea el combobox y pone enabled el btn para jugar de nuevo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnjugar_Click(object sender, RoutedEventArgs e)
+        {
+            btnJuegoNuevo.IsEnabled = true;
+            btnjugar.IsEnabled = false;
+            comboNivel.IsEnabled = false;
+            if (op1.IsSelected)
+            {
+                pintarRectangulo(4);
+            } else if (op2.IsSelected)
+                {
+                    pintarRectangulo(16);
+                }
+                else if (op3.IsSelected)
+                {
+                    pintarRectangulo(36);
+                }
+            }
+        }
 }

@@ -16,16 +16,14 @@
             
             <!--Stack Panel de la cabecera del nivel y el resultado-->
             <RelativePanel Background="#4DB6AC">
-                <AppBarButton Name="btnRestart" Icon="Refresh" Label="Jugar de nuevo" RelativePanel.AlignLeftWithPanel="True" Click="AppBarButton_Click" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="25,0,0,0" />
-
-                <AppBarButton Name="btnAnimacion" Click="btnAnimacion_Click" Icon="Play" Label="Embolia" Margin="200, 0, 0, 0" RelativePanel.AlignLeftWith="btnRestart"/>
-
+                <AppBarButton Icon="Play" x:Name="btnjugar" Label="Jugar" RelativePanel.AlignLeftWithPanel="True"  RelativePanel.AlignVerticalCenterWithPanel="True" Margin="25,0,0,0" Click="btnjugar_Click" IsEnabled="False" />
+                <AppBarButton x:Name="btnJuegoNuevo" Icon="Refresh" Label="Juego Nuevo" RelativePanel.RightOf="btnjugar" RelativePanel.AlignVerticalCenterWithPanel="True"  Margin="25,0,0,0" Click="AppBarButton_Click" IsEnabled="False"/>
                 <TextBlock x:Name="lblScore" Text="Puntuación:" FontSize="18" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" VerticalAlignment="Center" Margin="25,0,0,0"></TextBlock>
                 <TextBlock x:Name="txtScore" Text="0" RelativePanel.RightOf="lblScore" RelativePanel.AlignVerticalCenterWithPanel="True" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0" ></TextBlock>
                 
                 <!--Campos para que el usuario seleccione el nivel del juego-->
                 <TextBlock x:Name="lblNivel" Text="Nivel:" FontSize="18" RelativePanel.LeftOf="comboNivel" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,10,0"></TextBlock>
-                <ComboBox x:Name="comboNivel" Width="100"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,25,0" SelectionChanged="comboNivel_SelectionChanged">
+                <ComboBox x:Name="comboNivel" Width="100"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="0,0,25,0" SelectionChanged="comboNivel_SelectionChanged" IsEnabled="True">
                     <ComboBoxItem x:Name="op1">Normal</ComboBoxItem>
                     <ComboBoxItem x:Name="op2">Avanzado</ComboBoxItem>
                     <ComboBoxItem x:Name="op3">Profesional</ComboBoxItem>
@@ -85,20 +83,20 @@
                     <Rectangle x:Name="rec28" Tag="28" Grid.Column="3" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
                     
                     <!--Quinta columna-->
-                    <Rectangle x:Name="rec20" Grid.Column="4" Grid.Row="0" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec8" Grid.Column="4" Grid.Row="1" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec9" Grid.Column="4" Grid.Row="2" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec10" Grid.Column="4" Grid.Row="3" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec11" Grid.Column="4" Grid.Row="4" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec27" Grid.Column="4" Grid.Row="5" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec20" Tag="20" Grid.Column="4" Grid.Row="0" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec8" Tag="8" Grid.Column="4" Grid.Row="1" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec9" Tag="9" Grid.Column="4" Grid.Row="2" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec10" Tag="10" Grid.Column="4" Grid.Row="3" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec11" Tag="11" Grid.Column="4" Grid.Row="4" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec27" Tag="27" Grid.Column="4" Grid.Row="5" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
                     
                     <!--Sexta columna-->
-                    <Rectangle x:Name="rec21" Grid.Column="5" Grid.Row="0" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec22" Grid.Column="5" Grid.Row="1" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec23" Grid.Column="5" Grid.Row="2" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec24" Grid.Column="5" Grid.Row="3" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec25" Grid.Column="5" Grid.Row="4" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
-                    <Rectangle x:Name="rec26" Grid.Column="5" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec21" Tag="21" Grid.Column="5" Grid.Row="0" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec22" Tag="22" Grid.Column="5" Grid.Row="1" Fill="#44c300" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec23" Tag="23" Grid.Column="5" Grid.Row="2" Fill="#107c10" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec24" Tag="24" Grid.Column="5" Grid.Row="3" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec25" Tag="25" Grid.Column="5" Grid.Row="4" Fill="#ffe100" Tapped="rect_tapped"></Rectangle>
+                    <Rectangle x:Name="rec26" Tag="26" Grid.Column="5" Grid.Row="5" Fill="#FFB900" Tapped="rect_tapped"></Rectangle>
                     
                 </Grid>
             </Border>
