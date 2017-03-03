@@ -16,20 +16,8 @@ using Windows.Storage;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
-/*
-TODO    
-OK: que se cambie de color al original tras el flash (Mercedes) 
-OK: cambiar flash: opacity, visibility o un color y hacer que vuelva a la normalidadn (Mercedes)
-guardar las secuencia de maquina y usuario (Mercedes)
-OK: iniciar flash al comienzo (Alvaro)
-Game over: embolia de flash y mensaje de Game Over sobre el tablero si se puede (message box transparente??) (Carlos)
-OK: Hay que poner un play o algo y evitar que se empiece justo al cargar, usar btn Refresh en vez de play?? o poner 2 btns??
-deshabilitar play hasta que le de a refresh (2 btns)
 
-Extras v.63.2:
-Añadir sonidos al flash de la maquina y al click de la persona
-El boton de reinicio debe reiniciarse en el nivel en que estaba, no siempre en el Normal
-*/
+
 namespace simonSays_DI
 {
     /// <summary>
@@ -53,8 +41,7 @@ namespace simonSays_DI
             this.InitializeComponent();
             reproducirMusica();
 
-
-
+            #region DESKTOP VS MOBILE
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
                 row1.Height = new GridLength(0);
@@ -83,11 +70,12 @@ namespace simonSays_DI
                 col3.Width = new GridLength(250 / 2);
                 col4.Width = new GridLength(250 / 2);
                 col5.Width = new GridLength(0);
-
-
-
             }
+            #endregion
         }
+
+        #region SELECTOR NIVEL _CHANGED
+
         private void comboNivel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnjugar.IsEnabled = true;
@@ -150,7 +138,9 @@ namespace simonSays_DI
             }
 
         }
+        #endregion
 
+        #region RECTANGULO_TAP
         /// <summary>
         /// Metodo que se encarga de pintar el rectangulo de gris para que el usuario sepa que rectangulo tiene que pulsar
         /// </summary>
@@ -192,8 +182,9 @@ namespace simonSays_DI
                     embolia();
                 }
         }
+        #endregion
 
-        
+        #region PINTAR RECTANGULO ALEATORIO
         /// <summary>
         /// Metodo que pinta un rectangulo aleatorio dentro del tablero
         /// </summary>
@@ -210,6 +201,9 @@ namespace simonSays_DI
             secuenciaMaquina.Add(rectPintar);
             await Task.Delay(500);
         }
+        #endregion
+
+        #region PINTAR UN RECTANGULO AL AZAR
         /// <summary>
         /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
         /// </summary>
@@ -230,8 +224,9 @@ namespace simonSays_DI
             await Task.Delay(500);
             rectangulo.Fill = colorPrevio;
         }
+        #endregion
 
-
+        #region RECUPERAR UN CONTROL DADO SU NOMBRE
         //http://stackoverflow.com/questions/38110972/how-to-find-a-control-with-a-specific-name-in-an-xaml-ui-with-c-sharp-code
         /// <summary>
         /// Metodo que busca un control con un nombre concreto en todo el xaml dependiendo del tipo de control que sea
@@ -264,14 +259,9 @@ namespace simonSays_DI
             }
             return result;
         }
-        /// <summary>
-        /// Metodo que muestra un mensaje de error cuando el usuario falla
-        /// </summary>
-        public async void mostrarMensaje()
-        {
-            var dialog = new MessageDialog("Has perdidoooooo :((((((");
-            await dialog.ShowAsync();
-        }
+        #endregion
+
+        #region JUGAR DE NUEVO_CLICK
         /// <summary>
         /// Metodo que reinicia la actividad principal después de pulsar el btn de jugar de nuevo
         /// </summary>
@@ -281,8 +271,9 @@ namespace simonSays_DI
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+        #endregion
 
-
+        #region JUGAR_CLICK
         /// <summary>
         /// SE CORRESPONDE CON EL BTN PLAY EN EL XAML
         /// Metodo que se ejecuta despues de que el usuario pulse el btn de jugar
@@ -313,8 +304,9 @@ namespace simonSays_DI
 
                 start(tamanno);
             }
-                        
+        #endregion
 
+        #region INICIAR JUEGO
         /// <summary>
         /// Metodo que inicia el juego, se llamara desde btnJugar_Click
         /// </summary>
@@ -356,7 +348,9 @@ namespace simonSays_DI
 
             tapContador = 0;
         }
+        #endregion
 
+        #region EMBOLIA
         private async void embolia()
         {
 
@@ -427,7 +421,12 @@ namespace simonSays_DI
             }
 
         }
+        #endregion
+
         #region SONIDO
+        /// <summary>
+        /// Metodo que reproduce la musica al iniciarse la aplicacion
+        /// </summary>
         private async void reproducirMusica()
         {
 
