@@ -38,7 +38,6 @@ namespace simonSays_DI
     {
         int rectPintar;
         Boolean haGanado;
-        int contador = 0;
         int turno = 0;
         List<int> secuenciaMaquina = new List<int>(); //aqui guardo la secuencia de flash
         int tapContador=0;
@@ -156,24 +155,30 @@ namespace simonSays_DI
         /// <param name="e"></param>
         private async void rect_tapped(object sender, TappedRoutedEventArgs e)
         {
-            
-            Rectangle rectanClicked = sender as Rectangle;
 
-            Brush colorPrevio = rectanClicked.Fill;
+                Rectangle rectanClicked = sender as Rectangle;
 
-            rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
-            await Task.Delay(250);
-            rectanClicked.Fill = colorPrevio;
+                Brush colorPrevio = rectanClicked.Fill;
 
-            int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
+                rectanClicked.Fill = new SolidColorBrush(Colors.LightGray);
+                await Task.Delay(250);
+                rectanClicked.Fill = colorPrevio;
+
+                int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
 
                 if (secuenciaMaquina[tapContador] == rectanguloElegido)
                 {
                     tapContador++;
                     haGanado = true;
-                    contador++;
-                    txtScore.Text = contador.ToString();
-                    start(tamanno);
+
+
+
+                    if (tapContador == secuenciaMaquina.Count)
+                    {
+                        txtScore.Text = turno.ToString();
+                        start(tamanno);
+                    }
+
 
                 }
                 else
@@ -181,7 +186,6 @@ namespace simonSays_DI
                     haGanado = false;
                     mostrarMensaje();
                 }
-
         }
 
         
@@ -191,12 +195,14 @@ namespace simonSays_DI
         /// <param name="numRango">Numero total de rectangulos que hay en el tablero que el usuario ha elegido</param>
         public async void pintarRectangulo(int numRango)
         {
+            await Task.Delay(500);
             Random random = new Random();
             rectPintar = random.Next(1, numRango);
-            await Task.Delay(1000);
+            await Task.Delay(500);
             secuenciaFlash(rectPintar);
             //guardo el Tag del rectangulo que pinto
             secuenciaMaquina.Add(rectPintar);
+            await Task.Delay(500);
         }
         /// <summary>
         /// Metodo que avisa al usuario del rectangulo que tiene que pulsar
@@ -305,20 +311,41 @@ namespace simonSays_DI
         /// <summary>
         /// Metodo que inicia el juego, se llamara desde btnJugar_Click
         /// </summary>
-        private void start(int tamanno)
+        private async void start(int tamanno)
         {
-                if (secuenciaMaquina.Count == 0) {
+
+            for (int i = 1; i<=tamanno; i++) {
+                String nombreRectangulo = "rec" + i;
+                var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+                rectangulo.IsTapEnabled = false;
+            }
+
+            if (secuenciaMaquina.Count == 0) {
                     pintarRectangulo(tamanno); //añade el tag a secuenciaMaquina y llama a secuenciaFlash()
                     turno++;
-                } else {
+                for (int i = 1; i <= tamanno; i++)
+                {
+                    String nombreRectangulo = "rec" + i;
+                    var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+                    rectangulo.IsTapEnabled = true;
+                }
+            } else {
 
                     for (int i = 0; i <turno; i++)
                     {
-                      secuenciaFlash(secuenciaMaquina[i]);//pintamos los rectangulos guardados en secuenciaMaquina           
+                        await Task.Delay(500);
+                        secuenciaFlash(secuenciaMaquina[i]);//pintamos los rectangulos guardados en secuenciaMaquina 
+                        await Task.Delay(500);          
                     }
                      pintarRectangulo(tamanno);//añade el tag a secuenciaMaquina y llama a secuenciaFlash()
                      turno++;
+                for (int i = 1; i <= tamanno; i++)
+                {
+                    String nombreRectangulo = "rec" + i;
+                    var rectangulo = MainPage.FindControl<Rectangle>(this, typeof(Rectangle), nombreRectangulo);
+                    rectangulo.IsTapEnabled = true;
                 }
+            }
 
             tapContador = 0;
         }
