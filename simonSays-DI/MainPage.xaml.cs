@@ -43,6 +43,8 @@ namespace simonSays_DI
         int tapContador=0;
         int tamanno= 0;
 
+        MediaElement mediaElement = new MediaElement();
+
 
         public MainPage()
         {
@@ -50,6 +52,8 @@ namespace simonSays_DI
             this.InitializeComponent();
             //btnjugar.IsEnabled = false;
             //btnRefresh.IsEnabled = false;
+            mediaElement.Source =  new Uri("ms-appx://simonSays_DI/Assets/BeethovenNovena.mp3", UriKind.Absolute);
+            mediaElement.Play();
 
             
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
@@ -184,7 +188,9 @@ namespace simonSays_DI
                 else
                 {
                     haGanado = false;
-                    mostrarMensaje();
+                    txtScore.Text = "";
+                    lblScore.Text = "¡¡HAS PERDIDO!! \n  Puntuacion: "+ turno.ToString();
+                    embolia();
                 }
         }
 
@@ -197,7 +203,8 @@ namespace simonSays_DI
         {
             await Task.Delay(500);
             Random random = new Random();
-            rectPintar = random.Next(1, numRango);
+            int limMax = numRango + 1;
+            rectPintar = random.Next(1, limMax);//el limite maximo no esta incluido, el minimo si
             await Task.Delay(500);
             secuenciaFlash(rectPintar);
             //guardo el Tag del rectangulo que pinto
@@ -290,6 +297,7 @@ namespace simonSays_DI
             btnJuegoNuevo.IsEnabled = true;
             btnjugar.IsEnabled = false;
             comboNivel.IsEnabled = false;
+            secuenciaMaquina.Clear();
 
             if (op1.IsSelected)
             {
@@ -350,6 +358,77 @@ namespace simonSays_DI
             tapContador = 0;
         }
 
+        private async void embolia()
+        {
+
+            Rectangle[] rectangulos = new Rectangle[] { rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9, rec10, rec11, rec12, rec13, rec14, rec15,
+                rec16, rec17, rec18, rec19, rec20, rec21, rec22, rec23, rec24, rec25, rec26, rec27, rec28, rec29, rec30, rec31, rec32, rec33, rec34, rec35, rec36 };
+
+            SolidColorBrush rojoO = new SolidColorBrush(Color.FromArgb(255, 213, 0, 0));
+            SolidColorBrush rojoC = new SolidColorBrush(Color.FromArgb(255, 255, 46, 24));
+            SolidColorBrush azulO = new SolidColorBrush(Color.FromArgb(255, 0, 120, 215));
+            SolidColorBrush azulC = new SolidColorBrush(Color.FromArgb(255, 91, 131, 216));
+            SolidColorBrush amariO = new SolidColorBrush(Color.FromArgb(255, 255, 185, 0));
+            SolidColorBrush amariC = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+            SolidColorBrush verdeO = new SolidColorBrush(Color.FromArgb(255, 16, 124, 16));
+            SolidColorBrush verdeC = new SolidColorBrush(Color.FromArgb(255, 68, 195, 0));
+
+            for (int i = 0; i < rectangulos.Length; i++)
+            {
+
+                rectangulos[i].Fill = new SolidColorBrush(Colors.Red);
+                await Task.Delay(80);
+                rectangulos[i].Fill = new SolidColorBrush(Colors.Blue);
+                await Task.Delay(80);
+
+                rectangulos[2].Fill = azulO;
+                rectangulos[13].Fill = azulO;
+                rectangulos[28].Fill = azulO;
+                rectangulos[30].Fill = azulO;
+                rectangulos[32].Fill = azulO;
+
+                rectangulos[12].Fill = azulC;
+                rectangulos[14].Fill = azulC;
+                rectangulos[29].Fill = azulC;
+                rectangulos[31].Fill = azulC;
+
+                rectangulos[0].Fill = rojoO;
+                rectangulos[4].Fill = rojoO;
+                rectangulos[17].Fill = rojoO;
+                rectangulos[33].Fill = rojoO;
+                rectangulos[35].Fill = rojoO;
+
+                rectangulos[5].Fill = rojoC;
+                rectangulos[15].Fill = rojoC;
+                rectangulos[16].Fill = rojoC;
+                rectangulos[34].Fill = rojoC;
+
+                rectangulos[3].Fill = amariO;
+                rectangulos[10].Fill = amariO;
+                rectangulos[23].Fill = amariO;
+                rectangulos[25].Fill = amariO;
+                rectangulos[27].Fill = amariO;
+
+                rectangulos[9].Fill = amariC;
+                rectangulos[11].Fill = amariC;
+                rectangulos[24].Fill = amariC;
+                rectangulos[26].Fill = amariC;
+
+                rectangulos[1].Fill = verdeO;
+                rectangulos[7].Fill = verdeO;
+                rectangulos[18].Fill = verdeO;
+                rectangulos[20].Fill = verdeO;
+                rectangulos[22].Fill = verdeO;
+
+                rectangulos[6].Fill = verdeC;
+                rectangulos[8].Fill = verdeC;
+                rectangulos[19].Fill = verdeC;
+                rectangulos[21].Fill = verdeC;
+
+            }
+
+        }
+
     }
-   
+
 }
