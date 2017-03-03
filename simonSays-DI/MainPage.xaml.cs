@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Popups;
 using System.Collections.Generic;
+using Windows.Storage;
 
 // La plantilla de elemento Página en blanco está documentada en http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 //Binding colores: https://social.msdn.microsoft.com/Forums/vstudio/en-US/2f40843a-b7b6-4613-ad22-367ca855e765/binding-fill-color-of-rectangle-to-a-color?forum=wpf
@@ -50,12 +51,10 @@ namespace simonSays_DI
         {
 
             this.InitializeComponent();
-            //btnjugar.IsEnabled = false;
-            //btnRefresh.IsEnabled = false;
-            mediaElement.Source =  new Uri("ms-appx://simonSays_DI/Assets/BeethovenNovena.mp3", UriKind.Absolute);
-            mediaElement.Play();
+            reproducirMusica();
 
-            
+
+
             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
                 row1.Height = new GridLength(0);
@@ -428,6 +427,19 @@ namespace simonSays_DI
             }
 
         }
+        #region SONIDO
+        private async void reproducirMusica()
+        {
+
+            mediaElement.AudioCategory = Windows.UI.Xaml.Media.AudioCategory.Media;
+            StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Folder = await Folder.GetFolderAsync("Assets");
+            StorageFile sf = await Folder.GetFileAsync("BeethovenNovena.mp3");
+            mediaElement.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+            // mediaElement.Play();
+            mediaElement.IsLooping = true;
+        }
+        #endregion
 
     }
 
