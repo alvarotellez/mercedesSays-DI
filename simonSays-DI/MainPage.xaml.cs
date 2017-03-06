@@ -158,7 +158,8 @@ namespace simonSays_DI
                 rectanClicked.Fill = colorPrevio;
 
                 int rectanguloElegido = Int32.Parse(rectanClicked.Tag.ToString());
-
+            if (secuenciaMaquina.Count > 0)
+            {
                 if (secuenciaMaquina[tapContador] == rectanguloElegido)
                 {
                     tapContador++;
@@ -178,9 +179,10 @@ namespace simonSays_DI
                 {
                     haGanado = false;
                     txtScore.Text = "";
-                    lblScore.Text = "¡¡HAS PERDIDO!! \n  Puntuacion: "+ turno.ToString();
+                    lblScore.Text = "¡¡HAS PERDIDO!! \n  Puntuacion: " + turno.ToString();
                     embolia();
                 }
+            }
         }
         #endregion
 
